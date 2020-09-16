@@ -12,9 +12,9 @@ rd.seed(0)
 ## Step 2 ##
 
 L = 1
-Lambda = np.linspace(-L, L, num=201)
+Lambda = [-1, 1]
 
-b = 0.9
+b = 0.7
 n = 25
 N = n*n
 
@@ -36,7 +36,7 @@ def up_prob(S, past_val):
 
 def cdf(q, U, TV):
   F = np.add.accumulate(q)
-  index = np.where(F >= U*TV)[0][0]-1
+  index = np.where(F >= U*TV)[0][0]
   return index
 
 def create_img(X, Y, SX, SY, t, n, L):
@@ -59,7 +59,7 @@ def create_img(X, Y, SX, SY, t, n, L):
 ## Step 4 ##
 
 X = np.ones(N)
-Y = np.random.uniform(-L,L,N)
+Y = np.array(rd.choices(population=Lambda, k=N))
 
 SX = [np.average(X)]
 SY = [np.average(Y)]
